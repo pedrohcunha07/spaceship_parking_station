@@ -11,7 +11,7 @@ DEFAULT_PRICES = {
 
 class ParkingStation:
     def __init__(self, price_sheet: dict[str, float] | None = None, capacity: int = 10, csv_file_name: str = "parking_lot.csv"):       
-        # If price_sheet is None, initialize it as an empty dictionary
+        # If price_sheet is None, initialize it as an the DEFAULT_PRICES dictionary
         self.price_sheet = price_sheet if price_sheet is not None else DEFAULT_PRICES.copy() 
         
         # If capacity is None, initialize it as 0
