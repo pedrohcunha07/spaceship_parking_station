@@ -10,7 +10,7 @@ DEFAULT_PRICES = {
 }
 
 class ParkingStation:
-    def __init__(self, price_sheet: dict[str, float] | None, capacity: int = 10 | None, csv_file_name: str = "parking_lot.csv"):       
+    def __init__(self, price_sheet: dict[str, float] | None = None, capacity: int = 10, csv_file_name: str = "parking_lot.csv"):       
         # If price_sheet is None, initialize it as an empty dictionary
         self.price_sheet = price_sheet if price_sheet is not None else DEFAULT_PRICES.copy() 
         
@@ -61,6 +61,8 @@ class ParkingStation:
 
             # Add the ship name and model to the parking lot dictionary.
             self.parking_lot[ship_name] = ship_model
+            self.save_to_csv()
+
             print(f'Nave {ship_name} adicionada ao pátio com sucesso!')
 
         except KeyError:
@@ -81,6 +83,7 @@ class ParkingStation:
             release_ship_model = self.parking_lot[ship_name]
             price = time * self.price_sheet[release_ship_model]
             release_ship_model = self.parking_lot.pop(ship_name)
+            self.save_to_csv()
 
             return f"O preço a ser pago pela nave {ship_name} é: $${price:,.2f}"
         
@@ -89,7 +92,7 @@ class ParkingStation:
         except ValueError:
             print('ERRO: Valor inválido.')
 
-        self.save_to_csv()
+        
 
     def display_parking_lot(self) -> None:
         """Display the ships currently in the parking lot"""
@@ -114,8 +117,6 @@ def get_valid_hours() -> float:
             if time <= 0:
                 print('ERRO: O tempo deve ser maior que zero.')
                 continue
-            elif time < 1:
-                time = time * 60
             return time
         
         except ValueError:
