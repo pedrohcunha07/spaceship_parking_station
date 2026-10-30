@@ -5,6 +5,7 @@ This project demonstrates the use of Python's POO Fundamentals, just as the basi
 
 ### Overview
 This program allows you to register your spaceship, its name and model, based on a pre-existing dictionary of spaceship models, and if there's no dictionary, the program uses the default one.
+
 e.g: 
 | Model | Price |
 | :--- | :--- |
